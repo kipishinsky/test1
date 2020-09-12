@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import {useFormik} from 'formik'
 import {useDispatch} from 'react-redux'
@@ -7,13 +7,12 @@ import {loginTC, logOut, logOutTC} from '../bll/rootReducer'
 import s from './Login.module.scss'
 import Modal from '@material-ui/core/Modal'
 
-// подсветка индикации ошибки красным
-// попап
 
 export const Login = () => {
+
 	const dispatch = useDispatch()
 
-	const [open, setOpen] = React.useState(false)
+	const [open, setOpen] = useState<boolean>(false)
 
 	const handleOpen = () => {
 		setOpen(true)
