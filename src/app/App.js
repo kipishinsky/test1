@@ -11,7 +11,7 @@ import s from './App.module.scss'
 export function App() {
 	return (
 		<div className={s.app}>
-			{/*<Header />*/}
+			<Header />
 			<Route path='/main' render={ () => <Main /> }/>
 			<Route path='/news' render={ () => <News /> }/>
 			<Route path='/login' render={ () => <Login/> }/>

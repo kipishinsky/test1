@@ -5,12 +5,8 @@ import {addNewsUserTC, approwedPostTC, deletePost, setTerm} from '../bll/rootRed
 
 import s from './News.module.scss'
 
-
-// для админа одобрить таску
-// админ одобряет таску, тогда ее видят все
-
 export function News() {
-	//debugger
+
 	const news = useSelector(state => state.root.news)
 	const term = useSelector(state => state.root.term)
 	const name = useSelector(state => state.root.userInfo)
@@ -48,7 +44,6 @@ export function News() {
 
 
 	// user
-
 	const [nameNews, setNameNews] = useState({
 		name: ''
 	})
@@ -62,19 +57,16 @@ export function News() {
 	const valueNameNews = (e) => {
 		const name = e.target.value
 		setNameNews(name)
-		console.log(nameNews)
 	}
 
 	const valueTitleNews = (e) => {
 		const title = e.target.value
 		setTitleNews(title)
-		console.log(titleNews)
 	}
 
 	const valueDataNews = (e) => {
 		const data = e.target.value
 		setDataNews(data)
-		console.log(dataNews)
 	}
 
 	const addNewsButton = () => {

@@ -5,31 +5,21 @@
 	flex-direction: column;
 	width: 100%;
 	height: 100vh;
-	background-color: #615a5a;
-
-	.text {
-		width: 100%;
-		height: 20vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: white;
-		background-color: #616c89;
-	}
+	background-color: #778bc2;
 
 	.items {
 		padding: 0.5em;
-
 		.item {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			flex-direction: column;
+			color: white;
 			padding: 0.2em;
 		}
 
 		.itemName {
-			color: blue;
+			color: #44e79a;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -37,7 +27,7 @@
 		}
 
 		.itemData {
-
+			color: white;
 			display: flex;
 			align-items: flex-end;
 			flex-direction: column;
@@ -47,5 +37,30 @@
 
 	.form {
 		width: 50%;
+		padding: 5px;
+		margin: 5px;
+		border-radius: 5px;
+		text-align: center;
+	}
+
+	.addNews {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		padding: 5px;
+
+		.inputAddNews {
+			text-align: center;
+			width: 25em;
+			padding: 5px;
+			margin: 5px;
+			border-radius: 5px;
+		}
+		.btnAddNews {
+			width: 12em;
+			border-radius: 5px;
+			margin: 5px;
+		}
 	}
 }
