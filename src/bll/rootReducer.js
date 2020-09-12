@@ -14,7 +14,7 @@ const initialState = {
 		userName: '',
 		userPass: '',
 		userRoot: false,
-		licence: false
+		licence: true
 	},
 	news: [
 		{

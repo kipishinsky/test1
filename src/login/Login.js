@@ -7,7 +7,6 @@ import {loginTC, logOut, logOutTC} from '../bll/rootReducer'
 import s from './Login.module.scss'
 import Modal from '@material-ui/core/Modal'
 
-
 // подсветка индикации ошибки красным
 // попап
 
@@ -32,14 +31,10 @@ export const Login = () => {
 		},
 		onSubmit: values => {
 			if (values.login === 'admin' && values.password === '123') {
-				console.log(values.login, values.password)
 				dispatch(loginTC(values.login, values.password, true, true))
-
 			}
 			if (values.login === 'user' && values.password === '321') {
-				console.log(values.login, values.password)
 				dispatch(loginTC(values.login, values.password, true, false))
-
 			}
 		}
 	})
@@ -48,11 +43,11 @@ export const Login = () => {
 		dispatch(logOutTC( false, false))
 	}
 
-
 	return (
-		<div>
-			<div onClick={handleOpen}>
-				Open Modal
+		<div className={s.root}>
+			<div className={s.openModal}>
+				<button className={s.login} onClick={handleOpen}>Вход</button>
+				<button className={s.logout} onClick={LogOut}>Выход</button>
 			</div>
 			<Modal open={open}
 			       onClose={handleClose}
@@ -60,52 +55,30 @@ export const Login = () => {
 			       aria-describedby="simple-modal-description">
 				{<>
 					<form className={s.loginBox} onSubmit={formik.handleSubmit}>
-						<h1>Login</h1>
-						<div>login admin: admin <br/> login user: user</div>
-						<div>password admin: 123 <br/> password user: 321</div>
-
+						<h1 className={s.text}>Login</h1>
+						<div className={s.text}>login admin: admin <br/> login user: user</div>
+						<div className={s.text}>password admin: 123 <br/> password user: 321</div>
 						<input
 							name="login"
 							type="login"
 							onChange={formik.handleChange}
 							value={formik.values.login}
-							placeholder="login"
+							placeholder="username"
 						/>
 						<input
 							name="password"
 							type="password"
 							onChange={formik.handleChange}
 							value={formik.values.password}
+							placeholder="password"
 						/>
 						<button type='submit'>Sing in</button>
 					</form>
-					<button className={s.login} onClick={LogOut}>LogOut</button>
 				</>}
 			</Modal>
 		</div>
 	)
-	/*<>
-			<form className={s.loginBox} onSubmit={formik.handleSubmit}>
-				<h1>Login</h1>
-				<div>login admin: admin <br/> login user: user</div>
-				<div>password admin: 123 <br/> password user: 321</div>
 
-				<input
-					name="login"
-					type="login"
-					onChange={formik.handleChange}
-					value={formik.values.login}
-					placeholder="login"
-				/>
-				<input
-					name="password"
-					type="password"
-					onChange={formik.handleChange}
-					value={formik.values.password}
-				/>
-				<button type='submit'>Sing in</button>
-			</form>
-			<button className={s.login} onClick={LogOut}>LogOut</button>
-		</>*/
 }
+
 
