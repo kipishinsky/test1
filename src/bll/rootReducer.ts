@@ -42,18 +42,31 @@ const initialState: initialStateType = {
 	term: ''
 }
 
-export const setUser = (name: string, pass: string, license: boolean, userRoot: boolean) => ({type: 'SET_USER', name, pass, license, userRoot}) as const
+export const setUser = (name: string, pass: string, license: boolean, userRoot: boolean) => ({
+	type: 'SET_USER',
+	name,
+	pass,
+	license,
+	userRoot
+}) as const
 export const logOut = (license: boolean, userRoot: boolean) => ({type: 'LOGOUT', license, userRoot}) as const
-export const addNewsUser = (name: string, title: string, data: string, approved: boolean) => ({type: 'ADD_NEWS_USER', name, title, data, approved}) as const
+export const addNewsUser = (name: string, title: string, data: string, approved: boolean) => ({
+	type: 'ADD_NEWS_USER',
+	name,
+	title,
+	data,
+	approved
+}) as const
 export const setTerm = (term: string) => ({type: 'SEARCH', term}) as const
 export const deletePost = (id: string) => ({type: 'DELETE', id}) as const
 export const approwedPost = (id: string, approved: boolean) => ({type: 'APPROWED', id, approved}) as const
 
-export const rootReducer = (state: initialStateType = initialState , action: ActionType): initialStateType  => {
+export const rootReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
 
 	switch (action.type) {
 		case 'SET_USER': {
-			return {...state, userInfo: {
+			return {
+				...state, userInfo: {
 					...state.userInfo,
 					userName: action.name,
 					userPass: action.pass,
@@ -63,7 +76,8 @@ export const rootReducer = (state: initialStateType = initialState , action: Act
 			}
 		}
 		case 'LOGOUT': {
-			return {...state, userInfo: {
+			return {
+				...state, userInfo: {
 					...state.userInfo,
 					licence: action.license,
 					userRoot: action.userRoot
@@ -71,7 +85,8 @@ export const rootReducer = (state: initialStateType = initialState , action: Act
 			}
 		}
 		case 'ADD_NEWS_USER': {
-			return {...state, news: [...state.news, {
+			return {
+				...state, news: [...state.news, {
 					id: v1(),
 					name: action.name,
 					title: action.title,
@@ -90,7 +105,7 @@ export const rootReducer = (state: initialStateType = initialState , action: Act
 		}
 		case 'APPROWED': {
 			const changeNews = state.news.map(t => t.id === action.id ? {...t, approved: action.approved} : t)
-			return { ...state, news: changeNews}
+			return {...state, news: changeNews}
 		}
 		default:
 			return state
@@ -104,7 +119,7 @@ export const logOutTC = (license: boolean, userRoot: boolean) => (dispatch: Disp
 	dispatch(logOut(license, userRoot))
 }
 
-export const addNewsUserTC = (name: string, title:  string, data:  string, approved: boolean) => (dispatch: Dispatch<ActionType>) => {
+export const addNewsUserTC = (name: string, title: string, data: string, approved: boolean) => (dispatch: Dispatch<ActionType>) => {
 	dispatch(addNewsUser(name, title, data, approved))
 }
 export const approwedPostTC = (id: string, approved: boolean) => (dispatch: Dispatch<ActionType>) => {
@@ -121,6 +136,7 @@ export interface NewType {
 }
 
 export interface initialStateType {
+
 	userInfo: {
 		userName: string,
 		userPass: string,

@@ -4,34 +4,33 @@ import {useDispatch, useSelector} from 'react-redux'
 import {addNewsUserTC, approwedPostTC, deletePost, initialStateType, NewType, setTerm} from '../bll/rootReducer'
 
 import s from './News.module.scss'
+import {RootStateType} from '../bll/redux-store'
 
-type valueType = {
-	[key:string]: string
-}
 
 export function News() {
 
-	const news = useSelector<any>(state => state.root.news)
-
-	const term = useSelector<any>(state => state.root.term)
-
-	const name = useSelector<any>(state => state.root.userInfo)
+	const news = useSelector<RootStateType>(state => state.news)
+	const term = useSelector<RootStateType>(state => state.term)
+	const name = useSelector<RootStateType>(state => state.userInfo)
 
 	const dispatch = useDispatch()
 
-	const [blockState, setBlockState] = useState<any>({
+	const [blockState, setBlockState] = useState<valueType>({
 		term: ''
 	})
 
-	const search = (items: any, term: any) => {
+	const search = (items: initialStateType, term: initialStateType) => {
+		//@ts-ignore
 		if (term.length === '') {
 			return items
 		}
-
+		//@ts-ignore
 		return items.filter((item: NewType) => {
+			//@ts-ignore
 			return item.name.toLowerCase().indexOf(term) > -1
 		})
 	}
+	//@ts-ignore
 	const visibleNews = search(news, term)
 
 	const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +90,6 @@ export function News() {
 	// admin
 	// @ts-ignore
 	if (name.userRoot && name.licence) {
-
 		const elements = visibleNews.map((item: NewType) => {
 			return (
 				<div className={s.items} key={item.id}>
@@ -128,7 +126,6 @@ export function News() {
 	} else {
 		// @ts-ignore
 		if (!name.userRoot && name.licence) {
-
 				const elements = visibleNews.map((item: NewType) => {
 					return (
 						<div className={s.items} key={item.id}>
@@ -207,4 +204,8 @@ export function News() {
 				</div>
 			}
 	}
+}
+
+interface valueType {
+	[key:string]: string
 }

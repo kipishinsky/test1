@@ -1,14 +1,10 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux'
+import {applyMiddleware, createStore} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {rootReducer} from './rootReducer'
 
-let rootReducers = combineReducers({
-	root: rootReducer
-})
-
 export type RootStateType = ReturnType <typeof rootReducer>
 
-export let store = createStore(rootReducers, applyMiddleware(thunkMiddleware))
+export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 
 //@ts-ignore

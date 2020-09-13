@@ -22,8 +22,7 @@ export const Login = () => {
 		setOpen(false)
 	}
 
-
-	const formik = useFormik({
+	const formik = useFormik<formikType>({
 		initialValues: {
 			login: '',
 			password: ''
@@ -79,7 +78,10 @@ export const Login = () => {
 			</Modal>
 		</div>
 	)
-
 }
 
+interface formikType {
+	login: string,
+	password: string
+}
 
