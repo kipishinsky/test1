@@ -6,6 +6,5 @@ export type RootStateType = ReturnType <typeof rootReducer>
 
 export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
-
 //@ts-ignore
 window.store = store

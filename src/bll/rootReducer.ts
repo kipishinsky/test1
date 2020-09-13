@@ -1,5 +1,6 @@
 import {v1} from 'uuid'
 import {Dispatch} from 'redux'
+import {valueType} from '../news/News'
 
 const initialState: initialStateType = {
 
@@ -119,8 +120,8 @@ export const logOutTC = (license: boolean, userRoot: boolean) => (dispatch: Disp
 	dispatch(logOut(license, userRoot))
 }
 
-export const addNewsUserTC = (name: string, title: string, data: string, approved: boolean) => (dispatch: Dispatch<ActionType>) => {
-	dispatch(addNewsUser(name, title, data, approved))
+export const addNewsUserTC = (name: valueType, title: valueType, data: valueType, approved: boolean) => (dispatch: Dispatch<ActionType>) => {
+	dispatch(addNewsUser(name.name, title.title, data.data, approved))
 }
 export const approwedPostTC = (id: string, approved: boolean) => (dispatch: Dispatch<ActionType>) => {
 	dispatch(approwedPost(id, approved))
@@ -135,14 +136,15 @@ export interface NewType {
 	approved: boolean
 }
 
-export interface initialStateType {
+export interface UserInfo {
+	userName: string,
+	userPass: string,
+	userRoot: boolean,
+	licence: boolean
+}
 
-	userInfo: {
-		userName: string,
-		userPass: string,
-		userRoot: boolean,
-		licence: boolean
-	},
+export interface initialStateType {
+	userInfo: UserInfo,
 	news: Array<NewType>,
 	term: string
 }

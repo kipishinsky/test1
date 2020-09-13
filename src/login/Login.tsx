@@ -7,6 +7,10 @@ import {loginTC, logOut, logOutTC} from '../bll/rootReducer'
 import s from './Login.module.scss'
 import Modal from '@material-ui/core/Modal'
 
+interface formikType {
+	login: string,
+	password: string
+}
 
 export const Login = () => {
 
@@ -80,8 +84,5 @@ export const Login = () => {
 	)
 }
 
-interface formikType {
-	login: string,
-	password: string
-}
+
 

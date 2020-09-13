@@ -1,17 +1,27 @@
 import React, {ChangeEvent, useState} from 'react'
 
 import {useDispatch, useSelector} from 'react-redux'
-import {addNewsUserTC, approwedPostTC, deletePost, initialStateType, NewType, setTerm} from '../bll/rootReducer'
+import {
+	addNewsUserTC,
+	approwedPostTC,
+	deletePost,
+	NewType,
+	setTerm,
+	UserInfo
+} from '../bll/rootReducer'
 
 import s from './News.module.scss'
 import {RootStateType} from '../bll/redux-store'
 
+export interface valueType {
+	[key:string]: string
+}
 
 export function News() {
 
-	const news = useSelector<RootStateType>(state => state.news)
-	const term = useSelector<RootStateType>(state => state.term)
-	const name = useSelector<RootStateType>(state => state.userInfo)
+	const news = useSelector<RootStateType, Array<NewType>>(state => state.news)
+	const term = useSelector<RootStateType, string>(state => state.term)
+	const name = useSelector<RootStateType, UserInfo>(state => state.userInfo)
 
 	const dispatch = useDispatch()
 
@@ -19,18 +29,17 @@ export function News() {
 		term: ''
 	})
 
-	const search = (items: initialStateType, term: initialStateType) => {
-		//@ts-ignore
-		if (term.length === '') {
+	const search = (items: Array<NewType>, term: string) => {
+
+		if (term.length === 0) {
 			return items
 		}
-		//@ts-ignore
-		return items.filter((item: NewType) => {
-			//@ts-ignore
-			return item.name.toLowerCase().indexOf(term) > -1
+
+		return items.filter((item) => {
+			return item.name.toLowerCase().indexOf(term.toLowerCase()) > -1
 		})
 	}
-	//@ts-ignore
+
 	const visibleNews = search(news, term)
 
 	const onSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,29 +61,29 @@ export function News() {
 
 
 	// user
-	const [nameNews, setNameNews] = useState<any>({
+	const [nameNews, setNameNews] = useState<valueType>({
 		name: ''
 	})
-	const [titleNews, setTitleNews] = useState<any>({
+	const [titleNews, setTitleNews] = useState<valueType>({
 		title: ''
 	})
-	const [dataNews, setDataNews] = useState<any>({
+	const [dataNews, setDataNews] = useState<valueType>({
 		data: ''
 	})
 
 	const valueNameNews = (e: ChangeEvent<HTMLInputElement>) => {
 		const name = e.target.value
-		setNameNews(name)
+		setNameNews({name})
 	}
 
 	const valueTitleNews = (e: ChangeEvent<HTMLInputElement>) => {
 		const title = e.target.value
-		setTitleNews(title)
+		setTitleNews({title})
 	}
 
 	const valueDataNews = (e: ChangeEvent<HTMLInputElement>) => {
 		const data = e.target.value
-		setDataNews(data)
+		setDataNews({data})
 	}
 
 	const addNewsButton = () => {
@@ -84,11 +93,7 @@ export function News() {
 		setDataNews({data: ''})
 	}
 
-
-
-
 	// admin
-	// @ts-ignore
 	if (name.userRoot && name.licence) {
 		const elements = visibleNews.map((item: NewType) => {
 			return (
@@ -122,9 +127,8 @@ export function News() {
 			</div>
 		</div>
 
-		//user
+	//user
 	} else {
-		// @ts-ignore
 		if (!name.userRoot && name.licence) {
 				const elements = visibleNews.map((item: NewType) => {
 					return (
@@ -177,7 +181,7 @@ export function News() {
 
 				//guest
 			} else {
-			// @ts-ignore
+
 			const newsGuest = news.filter( (i: NewType) => i.approved)
 
 				const elements = newsGuest.map((item: NewType) => {
@@ -206,6 +210,4 @@ export function News() {
 	}
 }
 
-interface valueType {
-	[key:string]: string
-}
+
